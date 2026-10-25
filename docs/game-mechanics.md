@@ -113,11 +113,30 @@ There is no hard win condition — the galaxy is persistent. Players compete for
 - **Most battles won** — tracked per player
 - **Resource dominance** — players with high-yield systems accumulate resources faster
 
+## System Upgrades
+
+System upgrades improve defense rather than changing the resource economy. A
+system owner may upgrade their claimed system one level at a time by calling
+`resources.upgrade_system`; the resources contract verifies ownership and burns
+the required Plasma before calling `galaxy-map.upgrade_system`.
+
+The cost is `100 × next_level` PLSM (100 for level 1, 200 for level 2, and so
+on). The upgrade is immediate and atomic: if the Plasma burn or ownership check
+fails, the level does not change. Each level adds 5 points to the system's
+defense during battle; it does not increase `resource_yield`, alter ownership,
+or change fleet attack values. `upgrade_level` starts at 0 for newly
+initialized systems.
+
+This first version intentionally has no time lock or level cap. The escalating
+cost is the economic brake, while a future governance proposal can add a cap or
+change the defense curve without changing the stored field.
+
 ---
 
 ## Future Mechanics (open for contributors)
 
 - **Alliance system** — players form alliances, share system defense
-- **System upgrades** — spend Plasma to increase a system's defense or yield
+- **System upgrades** — the defense upgrade design above is implemented; future
+  proposals may add yield upgrades as a separate, explicitly priced path
 - **Fleet specializations** — unit type bonuses against specific enemies
 - **Seasonal resets** — optional governance-triggered galaxy resets (proposal: [seasonal-reset-design.md](seasonal-reset-design.md))
