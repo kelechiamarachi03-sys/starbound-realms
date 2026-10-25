@@ -86,8 +86,17 @@ Value: StarSystem {
   resource_yield: u32,
   defense_rating: u32,
   last_claimed: u64,
+  upgrade_level: u32,            // defense upgrades, starts at 0
 }
 ```
+
+`upgrade_level` was added to the serialized `StarSystem` shape after the first
+testnet deployment. New deployments initialize it to `0`. Existing deployed
+galaxies must be redeployed (or migrated with an explicitly versioned contract
+upgrade) before clients that decode the new shape are pointed at them; Soroban
+does not supply a default for a missing struct field. The current testnet
+deployment predates this field and is therefore not a compatible target for
+the upgrade-aware client until it is redeployed.
 
 **Grid size limit:** `initialize` writes one persistent storage entry per system
 in a single transaction (looping `grid_size × grid_size` times). A `grid_size`

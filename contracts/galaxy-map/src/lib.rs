@@ -281,6 +281,7 @@ impl GalaxyMapContract {
                 .expect("system not found");
             system.owner = None;
             system.last_claimed = 0;
+            system.upgrade_level = 0;
             env.storage()
                 .persistent()
                 .set(&DataKey::System(id), &system);
@@ -481,6 +482,22 @@ mod tests {
 
         assert_eq!(client.get_system(&0).owner, None);
         assert_eq!(client.get_system(&15).owner, None);
+        assert_eq!(client.get_system(&0).upgrade_level, 0);
+    }
+
+    #[test]
+    fn reset_season_clears_upgrade_levels_for_the_new_season() {
+        let env = Env::default();
+        let (client, admin) = setup_galaxy(&env);
+        let player = Address::generate(&env);
+        client.claim_system(&player, &2);
+        client.upgrade_system(&player, &2);
+        assert_eq!(client.get_system(&2).upgrade_level, 1);
+
+        client.reset_season(&admin);
+
+        assert_eq!(client.get_system(&2).owner, None);
+        assert_eq!(client.get_system(&2).upgrade_level, 0);
     }
 
     #[test]
