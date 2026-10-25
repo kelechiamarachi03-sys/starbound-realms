@@ -16,6 +16,7 @@ import { PlayerProfile } from './PlayerProfile';
 import { BattleLog } from './BattleLog';
 import { ResourceSetupBanner } from './ResourceSetupBanner';
 import { GalaxyEmptyState } from './GalaxyEmptyState';
+import { AlliancePanel } from './AlliancePanel';
 import { LoadingIndicator } from './LoadingIndicator';
 import { useNotification } from './Notifications';
 import { getStarboundClient } from '../lib/starboundClient';
@@ -272,6 +273,8 @@ export function GameView({ walletAddress, signTransaction, backendUrl }: GameVie
                 <Fleet fleet={fleet} onBuildUnit={buildUnit} />
               )}
             </div>
+
+            <AlliancePanel walletAddress={walletAddress} signTransaction={signTransaction} />
 
             <div>
               <h2 style={styles.galaxyTitle}>Battle History</h2>

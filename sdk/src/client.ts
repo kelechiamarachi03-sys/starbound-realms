@@ -48,6 +48,8 @@ export interface ContractIds {
   fleet: string;
   /** Deployed contract ID for the `battle` contract. */
   battle: string;
+  /** Deployed contract ID for the `alliance` contract. */
+  alliance: string;
 }
 
 export interface StarboundClientConfig {

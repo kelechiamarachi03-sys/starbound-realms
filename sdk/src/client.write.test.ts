@@ -21,7 +21,7 @@ function makeClient(server: Partial<rpc.Server>): StarboundClient {
   const client = new StarboundClient({
     rpcUrl: 'https://example.invalid',
     networkPassphrase: Networks.TESTNET,
-    contractIds: { galaxyMap: CONTRACT_ID, resources: CONTRACT_ID, fleet: CONTRACT_ID, battle: CONTRACT_ID },
+    contractIds: { galaxyMap: CONTRACT_ID, resources: CONTRACT_ID, fleet: CONTRACT_ID, battle: CONTRACT_ID, alliance: CONTRACT_ID },
   });
   (client as any).server = server;
   return client;

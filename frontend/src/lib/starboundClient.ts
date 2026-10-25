@@ -7,6 +7,7 @@ const REQUIRED_KEYS = [
   'VITE_CONTRACT_RESOURCES',
   'VITE_CONTRACT_FLEET',
   'VITE_CONTRACT_BATTLE',
+  'VITE_CONTRACT_ALLIANCE',
 ] as const;
 
 /** Reads one required env var, or throws a clear error naming which one is missing. */
@@ -28,6 +29,7 @@ export function buildStarboundClientConfig(env: Record<string, string | undefine
       resources: requireEnv(env, 'VITE_CONTRACT_RESOURCES'),
       fleet: requireEnv(env, 'VITE_CONTRACT_FLEET'),
       battle: requireEnv(env, 'VITE_CONTRACT_BATTLE'),
+      alliance: requireEnv(env, 'VITE_CONTRACT_ALLIANCE'),
     },
   };
 }

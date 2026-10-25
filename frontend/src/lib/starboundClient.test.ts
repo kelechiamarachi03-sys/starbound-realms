@@ -9,6 +9,7 @@ function validEnv(): Record<string, string | undefined> {
     VITE_CONTRACT_RESOURCES: 'CRESOURCES',
     VITE_CONTRACT_FLEET: 'CFLEET',
     VITE_CONTRACT_BATTLE: 'CBATTLE',
+    VITE_CONTRACT_ALLIANCE: 'CALLIANCE',
   };
 }
 
@@ -24,6 +25,7 @@ describe('buildStarboundClientConfig', () => {
         resources: 'CRESOURCES',
         fleet: 'CFLEET',
         battle: 'CBATTLE',
+        alliance: 'CALLIANCE',
       },
     });
   });
@@ -42,6 +44,7 @@ describe('buildStarboundClientConfig', () => {
     'VITE_CONTRACT_RESOURCES',
     'VITE_CONTRACT_FLEET',
     'VITE_CONTRACT_BATTLE',
+    'VITE_CONTRACT_ALLIANCE',
   ])('throws a clear error when %s is missing', (key) => {
     const env = validEnv();
     delete env[key];
